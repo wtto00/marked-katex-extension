@@ -46,7 +46,7 @@ function blockKatex(options) {
       }
     },
     renderer(token) {
-      return `<p>${katex.renderToString(token.text, options)}</p>`;
+      return `<p class="katex-block">${katex.renderToString(token.text, options)}</p>`;
     }
   };
 }
