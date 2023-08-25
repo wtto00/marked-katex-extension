@@ -1,8 +1,8 @@
 import katex from 'katex';
 
-const inlineStartRule = /(?<=\s|^)\${1,2}(?!\$)/;
-const inlineRule = /^(\${1,2})(?!\$)((?:\\.|[^\\\n])+?)(?<!\$)\1(?=[\s?!\.,:]|$)/;
-const blockRule = /^(\${1,2})\n((?:\\[^]|[^\\])+?)\n\1(?:\n|$)/;
+const inlineStartRule = new RegExp('(?<=\s|^)\${1,2}(?!\$)');
+const inlineRule = new RegExp('^(\${1,2})(?!\$)((?:\\.|[^\\\n])+?)(?<!\$)\x01(?=[\s?!\.,:]|$)');
+const blockRule = new RegExp('^(\${1,2})\n((?:\\[^]|[^\\])+?)\n\x01(?:\n|$)');
 
 export default function(options = {}) {
   return {
