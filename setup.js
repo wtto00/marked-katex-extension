@@ -8,7 +8,7 @@ const DIR = join(tmpdir(), 'jest_puppeteer_global_setup');
 export default async function() {
   const browser = await launch({
     executablePath:
-      'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
+      '/Applications/Safari.app',
     headless: 'new'
   });
   global.__BROWSER_GLOBAL__ = browser;

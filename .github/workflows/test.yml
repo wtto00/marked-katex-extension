@@ -11,17 +11,17 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - os: ubuntu-latest
-            name: Linux Firefox Stable
-            targetBrowser: Firefox_Stable
-            xvfb: true
+          # - os: ubuntu-latest
+          #   name: Linux Firefox Stable
+          #   targetBrowser: Firefox_Stable
+          #   xvfb: true
           # - os: ubuntu-latest
           #   name: Linux Chrome Stable
           #   targetBrowser: Chrome_Stable
           #   xvfb: true
-          # - os: macos-latest
-          #   name: OSX Safari Stable
-          #   targetBrowser: Safari_Stable
+          - os: macos-latest
+            name: OSX Safari Stable
+            targetBrowser: Safari_Stable
           # - os: macos-11
           #   name: iOS Simulator Safari 15.0
           #   targetBrowser: Safari_IOS_15_0
