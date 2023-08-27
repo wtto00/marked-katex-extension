@@ -1,3 +1,4 @@
+/** @type {import('@jest/types').Config.InitialOptions} */
 export default {
   restoreMocks: true,
   clearMocks: true,
@@ -17,5 +18,8 @@ export default {
   testRegex: /\.test\.js$/.source,
   transform: {
     '\\.[jt]sx?$': 'babel-jest'
-  }
+  },
+  globalSetup: './setup.js',
+  globalTeardown: './teardown.js',
+  testEnvironment: './puppeteer_environment.js'
 };

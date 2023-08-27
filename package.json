@@ -23,7 +23,7 @@
     }
   },
   "scripts": {
-    "test": "jest --verbose",
+    "test": "jest --verbose --detectOpenHandles",
     "test:cover": "jest --coverage",
     "test:types": "tsd -f spec/index.test-d.ts -t src/index.d.ts",
     "lint": "eslint .",
@@ -61,6 +61,8 @@
     "eslint-plugin-n": "^16.0.1",
     "eslint-plugin-promise": "^6.1.1",
     "jest-cli": "^29.6.3",
+    "jest-puppeteer": "^9.0.0",
+    "jest-specific-snapshot": "^8.0.0",
     "marked": "^7.0.4",
     "node-fetch": "^3.3.2",
     "rollup": "^3.28.0",
