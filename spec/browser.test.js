@@ -1,10 +1,9 @@
 import { resolve } from 'node:path';
 import { snapshots, normalize, normalizeSnapshotHtml } from './util.js';
-import 'jest-specific-snapshot';
 import { readFileSync } from 'node:fs';
+import 'jest-specific-snapshot';
 
 const timeout = 5000;
-
 const snapshotNames = Object.keys(snapshots).map((s, i) => ({ index: i, name: s }));
 const specs = JSON.parse(readFileSync('./spec/specs.json')); // fix when cwd is not root
 
@@ -38,38 +37,31 @@ function getHtmlContent() {
 describe(
   'marked-katex-extension',
   () => {
-    let page;
     beforeAll(async() => {
-      page = await global.__BROWSER__.newPage();
-
       await page.addStyleTag({ path: resolve('.', 'node_modules/katex/dist/katex.min.css') });
       await page.addScriptTag({ path: resolve('.', 'node_modules/marked/lib/marked.umd.js') });
       await page.addScriptTag({ path: resolve('.', 'lib/index.umd.js') });
 
       await page.setContent(getHtmlContent());
-    }, timeout);
-
-    afterAll(async() => {
-      await page.close();
     });
 
     test.each(snapshotNames)('$name', async({ index }) => {
       const html = await page.evaluate((i) => document.querySelectorAll('.marked-katex').item(i).innerHTML, index);
       expect(normalizeSnapshotHtml(html)).toMatchSpecificSnapshot('__snapshots__/index.test.js.snap');
-    });
+    }, timeout);
 
     describe('spec', () => {
       for (let index = 0; index < specsList.length; index++) {
         const specItem = specsList[index];
-        (specItem.only ? test.only : specItem.skip ? test.skip : test)(`Specs: ${specItem.name}`, async() => {
+        const testFunc = specItem.only ? test.only : specItem.skip ? test.skip : test;
+        testFunc(`Specs: ${specItem.name}`, async() => {
           const html = await page.evaluate((i) => document.querySelectorAll('.marked-katex-spec').item(i).innerHTML, index);
           const specItem = specsList[index];
           const multiline = specItem.source.includes('\n');
           const expected = multiline ? specItem.rendered : `<p>${specItem.rendered}</p>`;
+          // eslint-disable-next-line jest/no-standalone-expect
           expect(normalize(html)).toBe(normalize(expected));
-        });
+        }, timeout);
       }
     });
-  },
-  timeout
-);
+  });

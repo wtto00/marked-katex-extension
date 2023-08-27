@@ -1,3 +1,5 @@
+import { devices } from 'playwright';
+
 /** @type {import('@jest/types').Config.InitialOptions} */
 export default {
   restoreMocks: true,
@@ -15,11 +17,23 @@ export default {
       statements: 100
     }
   },
-  testRegex: /\.test\.js$/.source,
+  testRegex: /browser\.test\.js$/.source,
   transform: {
     '\\.[jt]sx?$': 'babel-jest'
   },
-  globalSetup: './setup.js',
-  globalTeardown: './teardown.js',
-  testEnvironment: './puppeteer_environment.js'
+  preset: 'jest-playwright-preset',
+  testEnvironmentOptions: {
+    'jest-playwright': {
+      browsers: ['webkit'],
+      // browsers: ['chromium', 'firefox', 'webkit'],
+      devices: [
+        devices['iPhone 7']
+        // devices['Pixel 4'],
+        // devices['Desktop Chrome'],
+        // devices['Desktop Safari'],
+        // devices['Desktop Edge'],
+        // devices['Desktop Firefox']
+      ]
+    }
+  }
 };

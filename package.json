@@ -23,7 +23,7 @@
     }
   },
   "scripts": {
-    "test": "jest --verbose --detectOpenHandles",
+    "test": "jest --verbose",
     "test:cover": "jest --coverage",
     "test:types": "tsd -f spec/index.test-d.ts -t src/index.d.ts",
     "lint": "eslint .",
@@ -58,13 +58,16 @@
     "eslint": "^8.47.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-jest": "^27.2.3",
     "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-playwright": "^0.15.3",
     "eslint-plugin-promise": "^6.1.1",
     "jest-cli": "^29.6.3",
-    "jest-puppeteer": "^9.0.0",
+    "jest-playwright-preset": "^3.0.1",
     "jest-specific-snapshot": "^8.0.0",
     "marked": "^7.0.4",
     "node-fetch": "^3.3.2",
+    "playwright": "^1.37.1",
     "rollup": "^3.28.0",
     "semantic-release": "^21.0.7",
     "tsd": "^0.28.1"
