@@ -132,51 +132,50 @@ const customLaunchers = ciLauncher
       base: 'Edge'
     }
   };
+const MobileSafari = function(baseBrowserDecorator, args) {
+  if (process.platform !== 'darwin') {
+    log.error('This launcher only works in MacOS.');
+    this._process.kill();
+    return;
+  }
+  baseBrowserDecorator(this);
+  this.on('start', url => {
+    simctl.getDevices(args.sdk, args.platform).then(devices => {
+      const d = devices.find(d => {
+        return d.name === args.name;
+      });
+
+      if (!d) {
+        log.error(`No device found for sdk ${args.sdk} with name ${args.name}`);
+        log.info('Available devices:', devices);
+        this._process.kill();
+        return;
+      }
+
+      return iosSimulator.getSimulator(d.udid).then(device => {
+        return simctl.bootDevice(d.udid).then(() => device);
+      }).then(device => {
+        return device.waitForBoot(60 * 5 * 1000).then(() => {
+          return device.openUrl(url);
+        });
+      });
+    }).catch(e => {
+      console.log('err,', e);
+    });
+  });
+};
+
+MobileSafari.prototype = {
+  name: 'MobileSafari',
+  DEFAULT_CMD: {
+    darwin: '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
+  },
+  ENV_CMD: null
+};
+
+MobileSafari.$inject = ['baseBrowserDecorator', 'args'];
 
 module.exports = function(config) {
-  const MobileSafari = function(baseBrowserDecorator, args) {
-    if (process.platform !== 'darwin') {
-      log.error('This launcher only works in MacOS.');
-      this._process.kill();
-      return;
-    }
-    baseBrowserDecorator(this);
-    this.on('start', url => {
-      simctl.getDevices(args.sdk, args.platform).then(devices => {
-        const d = devices.find(d => {
-          return d.name === args.name;
-        });
-
-        if (!d) {
-          log.error(`No device found for sdk ${args.sdk} with name ${args.name}`);
-          log.info('Available devices:', devices);
-          this._process.kill();
-          return;
-        }
-
-        return iosSimulator.getSimulator(d.udid).then(device => {
-          return simctl.bootDevice(d.udid).then(() => device);
-        }).then(device => {
-          return device.waitForBoot(60 * 5 * 1000).then(() => {
-            return device.openUrl(url);
-          });
-        });
-      }).catch(e => {
-        console.log('err,', e);
-      });
-    });
-  };
-
-  MobileSafari.prototype = {
-    name: 'MobileSafari',
-    DEFAULT_CMD: {
-      darwin: '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
-    },
-    ENV_CMD: null
-  };
-
-  MobileSafari.$inject = ['baseBrowserDecorator', 'args'];
-
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -259,7 +258,10 @@ module.exports = function(config) {
     plugins: [
       'karma-*',
       require('@chiragrupani/karma-chromium-edge-launcher'),
-      require('./server.cjs')
+      require('./server.cjs'),
+      {
+        'launcher:MobileSafari': ['type', MobileSafari]
+      }
     ]
   });
 };
