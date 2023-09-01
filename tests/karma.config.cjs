@@ -243,16 +243,18 @@ module.exports = function(config) {
     // available browser launchers: https://www.npmjs.com/search?q=keywords:karma-launcher
     browsers: Object.keys(customLaunchers),
     customLaunchers,
-    browserNoActivityTimeout: 30000,
+    captureTimeout: 300000, // 5 minutes
+    browserDisconnectTimeout: 60000, // 1 minute
+    browserNoActivityTimeout: 1200000, // 20 minutes
     // browsers: ['Chrome', 'Firefox', 'ChromeCanary', 'ChromeHeadless', 'Safari', 'PhantomJS', 'Opera', 'IE'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
+    singleRun: true,
 
     // Concurrency level
     // how many browser instances should be started simultaneously
-    concurrency: Infinity,
+    concurrency: 5,
     plugins: [
       'karma-*',
       require('@chiragrupani/karma-chromium-edge-launcher'),
