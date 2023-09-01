@@ -122,11 +122,14 @@ const ciLauncher = launchers[process.env.TARGET_BROWSER];
 const customLaunchers = ciLauncher
   ? { target_browser: ciLauncher }
   : {
-    stable_chrome: {
-      base: 'ChromeHeadless'
-    },
-    stable_firefox: {
-      base: 'Firefox'
+    // stable_chrome: {
+    //   base: 'ChromeHeadless'
+    // },
+    // stable_firefox: {
+    //   base: 'Firefox'
+    // }
+    local_edge: {
+      base: 'Edge'
     }
   };
 const MobileSafari = function(baseBrowserDecorator, args) {
@@ -213,7 +216,8 @@ module.exports = function(config) {
       external: ['marked', 'chai', 'mocha'],
       plugins: [
         require('@rollup/plugin-commonjs')(),
-        require('@rollup/plugin-node-resolve')()
+        require('@rollup/plugin-node-resolve')(),
+        require('@rollup/plugin-json')()
       ]
     },
 
@@ -239,6 +243,7 @@ module.exports = function(config) {
     // available browser launchers: https://www.npmjs.com/search?q=keywords:karma-launcher
     browsers: Object.keys(customLaunchers),
     customLaunchers,
+    browserNoActivityTimeout: 30000,
     // browsers: ['Chrome', 'Firefox', 'ChromeCanary', 'ChromeHeadless', 'Safari', 'PhantomJS', 'Opera', 'IE'],
 
     // Continuous Integration mode
