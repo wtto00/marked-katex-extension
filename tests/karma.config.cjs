@@ -59,65 +59,6 @@ const launchers = {
     avdName: "Pixel_7_API_33_x86_64",
     sdkHome: "/home/runner/.android/sdk/",
   },
-  SauceLabs_IE9: {
-    base: "SauceLabs",
-    browserName: "internet explorer",
-    version: "9.0",
-    platform: "Windows 7",
-  },
-  SauceLabs_IE10: {
-    base: "SauceLabs",
-    browserName: "internet explorer",
-    version: "10.0",
-    platform: "Windows 7",
-  },
-  SauceLabs_IE11: {
-    base: "SauceLabs",
-    browserName: "internet explorer",
-    version: "11.0",
-    platform: "Windows 7",
-  },
-  SauceLabs_Edge18: {
-    base: "SauceLabs",
-    browserName: "MicrosoftEdge",
-    version: "18.17763",
-    platform: "Windows 10",
-  },
-  SauceLabs_Android4: {
-    base: "SauceLabs",
-    browserName: "Browser",
-    platform: "Android",
-    version: "4.4",
-    device: "Android Emulator",
-  },
-  SauceLabs_iOS10_3: {
-    base: "SauceLabs",
-    browserName: "Safari",
-    platform: "iOS",
-    version: "10.3",
-    device: "iPhone 7 Plus Simulator",
-  },
-  SauceLabs_iOS9_3: {
-    base: "SauceLabs",
-    browserName: "Safari",
-    platform: "iOS",
-    version: "9.3",
-    device: "iPhone 6 Plus Simulator",
-  },
-  IE_9: {
-    base: "IE",
-    "x-ua-compatible": "IE=EmulateIE9",
-    flags: ["-extoff"],
-  },
-  IE_10: {
-    base: "IE",
-    "x-ua-compatible": "IE=EmulateIE10",
-    flags: ["-extoff"],
-  },
-  IE_11: {
-    base: "IE",
-    flags: ["-extoff"],
-  },
   Safari_Stable: {
     base: "SafariNative",
   },
@@ -154,7 +95,7 @@ const customLaunchers = ciLauncher
       local_android_browser: {
         base: "AndroidEmulator",
         avdName: "Pixel_7_API_33_x86_64",
-        sdkHome: "~/Library/Android/sdk/",
+        imageName: ''
       },
     };
 
@@ -212,6 +153,9 @@ MobileSafari.prototype = {
 };
 
 MobileSafari.$inject = ["baseBrowserDecorator", "args"];
+var ip = require("ip");
+
+var myip = ip.address();
 
 module.exports = function (config) {
   config.set({
@@ -262,6 +206,7 @@ module.exports = function (config) {
     // available reporters: https://www.npmjs.com/search?q=keywords:karma-reporter
     reporters: ["progress"],
 
+    hostname: myip,
     // web server port
     port: 9876,
 
@@ -282,6 +227,7 @@ module.exports = function (config) {
     captureTimeout: 300000, // 5 minutes
     browserDisconnectTimeout: 60000, // 1 minute
     browserNoActivityTimeout: 1200000, // 20 minutes
+    browserDisconnectTolerance: 3,
     // browsers: ['Chrome', 'Firefox', 'ChromeCanary', 'ChromeHeadless', 'Safari', 'PhantomJS', 'Opera', 'IE'],
 
     // Continuous Integration mode
@@ -298,6 +244,7 @@ module.exports = function (config) {
       {
         "launcher:MobileSafari": ["type", MobileSafari],
       },
+      require("@wtto00/karma-android-emulator-launcher"),
     ],
   });
 };
