@@ -72,10 +72,16 @@ jobs:
       - name: Setup Android SDK
         if: ${{ matrix.config.setupAndroid == true }}
         uses: amyu/setup-android@v3
-      - name: Set Environment
-        if: ${{ matrix.config.setupAndroid == true }}
-        run: alias adb="$ANDROID_HOME/platform-tools/adb" \
-          alias avdmanager="$ANDROID_HOME/cmdline-tools/bin/avdmanage"
+      # - name: Set Environment
+      #   if: ${{ matrix.config.setupAndroid == true }}
+      #   run: |
+      #     rc=/tmp/rcfile
+      #     echo 'alias adb="$ANDROID_HOME/platform-tools/adb"' > $rc
+      #     echo 'alias avdmanager="$ANDROID_HOME/cmdline-tools/bin/avdmanage"' >> $rc
+      # - name: Run browser tests
+      #   if: ${{ matrix.config.setupAndroid == true }}
+      #   run: |
+      #     source /tmp/rcfile
 
       - name: Run browser tests 👩🏽‍💻
         if: ${{ matrix.config.xvfb != true }}
