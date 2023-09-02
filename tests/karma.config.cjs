@@ -1,230 +1,266 @@
 // Karma configuration
 // Generated on Sun Aug 27 2023 21:47:29 GMT+0800 (中国标准时间)
-const simctl = require('node-simctl');
-const iosSimulator = require('appium-ios-simulator');
+const simctl = require("node-simctl");
+const iosSimulator = require("appium-ios-simulator");
 
-const log = require('karma/lib/logger').create('launcher:MobileSafari');
+const log = require("karma/lib/logger").create("launcher:MobileSafari");
 
 const launchers = {
   Safari_IOS_9: {
-    base: 'MobileSafari',
-    name: 'iPhone 5s',
-    platform: 'iOS',
-    sdk: '9.0'
+    base: "MobileSafari",
+    name: "iPhone 5s",
+    platform: "iOS",
+    sdk: "9.0",
   },
   Safari_IOS_10: {
-    base: 'MobileSafari',
-    name: 'iPhone 5s',
-    platform: 'iOS',
-    sdk: '10.0'
+    base: "MobileSafari",
+    name: "iPhone 5s",
+    platform: "iOS",
+    sdk: "10.0",
   },
   Safari_IOS_12: {
-    base: 'MobileSafari',
-    name: 'iPhone 5s',
-    platform: 'iOS',
-    sdk: '12.4'
+    base: "MobileSafari",
+    name: "iPhone 5s",
+    platform: "iOS",
+    sdk: "12.4",
   },
   Safari_IOS_13: {
-    base: 'MobileSafari',
-    name: 'iPhone 8',
-    platform: 'iOS',
-    sdk: '13.7'
+    base: "MobileSafari",
+    name: "iPhone 8",
+    platform: "iOS",
+    sdk: "13.7",
   },
   Safari_IOS_14: {
-    base: 'MobileSafari',
-    name: 'iPhone 8',
-    platform: 'iOS',
-    sdk: '14.4'
+    base: "MobileSafari",
+    name: "iPhone 8",
+    platform: "iOS",
+    sdk: "14.4",
   },
   Safari_IOS_15_0: {
-    base: 'MobileSafari',
-    name: 'iPhone 13',
-    platform: 'iOS',
-    sdk: '15.0'
+    base: "MobileSafari",
+    name: "iPhone 13",
+    platform: "iOS",
+    sdk: "15.0",
   },
   Safari_IOS_15: {
-    base: 'MobileSafari',
-    name: 'iPhone 13',
-    platform: 'iOS',
-    sdk: '15.2'
+    base: "MobileSafari",
+    name: "iPhone 13",
+    platform: "iOS",
+    sdk: "15.2",
+  },
+  Safari_IOS_16_0: {
+    base: "MobileSafari",
+    name: "iPhone 14",
+    platform: "iOS",
+    sdk: "16.0",
+  },
+  Pixel_7_API_33_x86_64: {
+    base: "AndroidEmulator",
+    avdName: "Pixel_7_API_33_x86_64",
+    sdkHome: "~/.android/sdk/",
   },
   SauceLabs_IE9: {
-    base: 'SauceLabs',
-    browserName: 'internet explorer',
-    version: '9.0',
-    platform: 'Windows 7'
+    base: "SauceLabs",
+    browserName: "internet explorer",
+    version: "9.0",
+    platform: "Windows 7",
   },
   SauceLabs_IE10: {
-    base: 'SauceLabs',
-    browserName: 'internet explorer',
-    version: '10.0',
-    platform: 'Windows 7'
+    base: "SauceLabs",
+    browserName: "internet explorer",
+    version: "10.0",
+    platform: "Windows 7",
   },
   SauceLabs_IE11: {
-    base: 'SauceLabs',
-    browserName: 'internet explorer',
-    version: '11.0',
-    platform: 'Windows 7'
+    base: "SauceLabs",
+    browserName: "internet explorer",
+    version: "11.0",
+    platform: "Windows 7",
   },
   SauceLabs_Edge18: {
-    base: 'SauceLabs',
-    browserName: 'MicrosoftEdge',
-    version: '18.17763',
-    platform: 'Windows 10'
+    base: "SauceLabs",
+    browserName: "MicrosoftEdge",
+    version: "18.17763",
+    platform: "Windows 10",
   },
   SauceLabs_Android4: {
-    base: 'SauceLabs',
-    browserName: 'Browser',
-    platform: 'Android',
-    version: '4.4',
-    device: 'Android Emulator'
+    base: "SauceLabs",
+    browserName: "Browser",
+    platform: "Android",
+    version: "4.4",
+    device: "Android Emulator",
   },
   SauceLabs_iOS10_3: {
-    base: 'SauceLabs',
-    browserName: 'Safari',
-    platform: 'iOS',
-    version: '10.3',
-    device: 'iPhone 7 Plus Simulator'
+    base: "SauceLabs",
+    browserName: "Safari",
+    platform: "iOS",
+    version: "10.3",
+    device: "iPhone 7 Plus Simulator",
   },
   SauceLabs_iOS9_3: {
-    base: 'SauceLabs',
-    browserName: 'Safari',
-    platform: 'iOS',
-    version: '9.3',
-    device: 'iPhone 6 Plus Simulator'
+    base: "SauceLabs",
+    browserName: "Safari",
+    platform: "iOS",
+    version: "9.3",
+    device: "iPhone 6 Plus Simulator",
   },
   IE_9: {
-    base: 'IE',
-    'x-ua-compatible': 'IE=EmulateIE9',
-    flags: ['-extoff']
+    base: "IE",
+    "x-ua-compatible": "IE=EmulateIE9",
+    flags: ["-extoff"],
   },
   IE_10: {
-    base: 'IE',
-    'x-ua-compatible': 'IE=EmulateIE10',
-    flags: ['-extoff']
+    base: "IE",
+    "x-ua-compatible": "IE=EmulateIE10",
+    flags: ["-extoff"],
   },
   IE_11: {
-    base: 'IE',
-    flags: ['-extoff']
+    base: "IE",
+    flags: ["-extoff"],
   },
   Safari_Stable: {
-    base: 'SafariNative'
+    base: "SafariNative",
   },
   Chrome_Stable: {
-    base: 'ChromeHeadless'
+    base: "ChromeHeadless",
   },
   Firefox_Stable: {
-    base: 'Firefox'
-  }
+    base: "Firefox",
+  },
+  Edge_Stable: {
+    base: "Edge",
+  },
 };
 const ciLauncher = launchers[process.env.TARGET_BROWSER];
 
 const customLaunchers = ciLauncher
   ? { target_browser: ciLauncher }
   : {
-    // stable_chrome: {
-    //   base: 'ChromeHeadless'
-    // },
-    // stable_firefox: {
-    //   base: 'Firefox'
-    // }
-    local_edge: {
-      base: 'Edge'
-    }
-  };
-const MobileSafari = function(baseBrowserDecorator, args) {
-  if (process.platform !== 'darwin') {
-    log.error('This launcher only works in MacOS.');
+      // stable_chrome: {
+      //   base: 'ChromeHeadless'
+      // },
+      // stable_firefox: {
+      //   base: 'Firefox'
+      // }
+      // local_edge: {
+      //   base: 'Edge'
+      // }
+      // local_ios_safari: {
+      //   base: "MobileSafari",
+      //   name: "iPhone 14",
+      //   platform: "iOS",
+      //   sdk: "16.0",
+      // },
+      local_android_browser: {
+        base: "AndroidEmulator",
+        avdName: "Pixel_7_API_33_x86_64",
+        sdkHome: "~/Library/Android/sdk/",
+      },
+    };
+
+const MobileSafari = function (baseBrowserDecorator, args) {
+  if (process.platform !== "darwin") {
+    log.error("This launcher only works in MacOS.");
     this._process.kill();
     return;
   }
+  simctl.getDevices().then((res) => {
+    console.log(res);
+  });
   baseBrowserDecorator(this);
-  this.on('start', url => {
-    simctl.getDevices(args.sdk, args.platform).then(devices => {
-      const d = devices.find(d => {
-        return d.name === args.name;
-      });
-
-      if (!d) {
-        log.error(`No device found for sdk ${args.sdk} with name ${args.name}`);
-        log.info('Available devices:', devices);
-        this._process.kill();
-        return;
-      }
-
-      return iosSimulator.getSimulator(d.udid).then(device => {
-        return simctl.bootDevice(d.udid).then(() => device);
-      }).then(device => {
-        return device.waitForBoot(60 * 5 * 1000).then(() => {
-          return device.openUrl(url);
+  this.on("start", (url) => {
+    simctl
+      .getDevices(args.sdk, args.platform)
+      .then((devices) => {
+        const d = devices.find((d) => {
+          return d.name === args.name;
         });
+
+        if (!d) {
+          log.error(
+            `No device found for sdk ${args.sdk} with name ${args.name}`
+          );
+          log.info("Available devices:", devices);
+          this._process.kill();
+          return;
+        }
+
+        return iosSimulator
+          .getSimulator(d.udid)
+          .then((device) => {
+            return simctl.bootDevice(d.udid).then(() => device);
+          })
+          .then((device) => {
+            return device.waitForBoot(60 * 5 * 1000).then(() => {
+              return device.openUrl(url);
+            });
+          });
+      })
+      .catch((e) => {
+        console.log("err,", e);
       });
-    }).catch(e => {
-      console.log('err,', e);
-    });
   });
 };
 
 MobileSafari.prototype = {
-  name: 'MobileSafari',
+  name: "MobileSafari",
   DEFAULT_CMD: {
-    darwin: '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
+    darwin:
+      "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator",
   },
-  ENV_CMD: null
+  ENV_CMD: null,
 };
 
-MobileSafari.$inject = ['baseBrowserDecorator', 'args'];
+MobileSafari.$inject = ["baseBrowserDecorator", "args"];
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
-
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: "",
 
     // frameworks to use
     // available frameworks: https://www.npmjs.com/search?q=keywords:karma-adapter
-    frameworks: ['mocha', 'chai', 'snapshot', 'mocha-snapshot'],
+    frameworks: ["mocha", "chai", "snapshot", "mocha-snapshot"],
 
     // list of files / patterns to load in the browser
     files: [
-      { pattern: './__snapshots__/*.md', included: false, watched: false },
-      '../node_modules/marked/lib/marked.umd.js',
-      { pattern: './*.spec.js', watched: false }
+      { pattern: "./__snapshots__/*.md", included: false, watched: false },
+      "../node_modules/marked/lib/marked.umd.js",
+      { pattern: "./*.spec.js", watched: false },
     ],
 
     // list of files / patterns to exclude
-    exclude: [
-    ],
+    exclude: [],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
     preprocessors: {
-      './__snapshots__/*.md': ['snapshot'],
-      './*.spec.js': ['rollup']
+      "./__snapshots__/*.md": ["snapshot"],
+      "./*.spec.js": ["rollup"],
     },
     rollupPreprocessor: {
       output: {
-        name: 'lib',
-        format: 'iife',
-        sourcemap: 'inline',
+        name: "lib",
+        format: "iife",
+        sourcemap: "inline",
         globals: {
-          marked: 'marked',
-          chai: 'chai',
-          mocha: 'window'
-        }
+          marked: "marked",
+          chai: "chai",
+          mocha: "window",
+        },
       },
-      external: ['marked', 'chai', 'mocha'],
+      external: ["marked", "chai", "mocha"],
       plugins: [
-        require('@rollup/plugin-commonjs')(),
-        require('@rollup/plugin-node-resolve')(),
-        require('@rollup/plugin-json')()
-      ]
+        require("@rollup/plugin-commonjs")(),
+        require("@rollup/plugin-node-resolve")(),
+        require("@rollup/plugin-json")(),
+      ],
     },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://www.npmjs.com/search?q=keywords:karma-reporter
-    reporters: ['progress'],
+    reporters: ["progress"],
 
     // web server port
     port: 9876,
@@ -256,12 +292,12 @@ module.exports = function(config) {
     // how many browser instances should be started simultaneously
     concurrency: 5,
     plugins: [
-      'karma-*',
-      require('@chiragrupani/karma-chromium-edge-launcher'),
-      require('./server.cjs'),
+      "karma-*",
+      require("@chiragrupani/karma-chromium-edge-launcher"),
+      require("./server.cjs"),
       {
-        'launcher:MobileSafari': ['type', MobileSafari]
-      }
-    ]
+        "launcher:MobileSafari": ["type", MobileSafari],
+      },
+    ],
   });
 };

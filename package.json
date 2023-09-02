@@ -70,6 +70,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "jest-cli": "^29.6.3",
     "karma": "^6.4.2",
+    "karma-android-emulator-launcher": "^0.0.1",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^3.2.0",
     "karma-firefox-launcher": "^2.1.2",
