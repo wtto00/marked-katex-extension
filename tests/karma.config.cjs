@@ -48,16 +48,16 @@ const launchers = {
     platform: "iOS",
     sdk: "15.2",
   },
-  Safari_IOS_16_0: {
+  Safari_IOS_16_2: {
     base: "MobileSafari",
     name: "iPhone 14",
     platform: "iOS",
-    sdk: "16.0",
+    sdk: "16.2",
   },
   Pixel_7_API_33_x86_64: {
     base: "AndroidEmulator",
     avdName: "Pixel_7_API_33_x86_64",
-    sdkHome: "~/.android/sdk/",
+    sdkHome: "/home/runner/.android/sdk/",
   },
   SauceLabs_IE9: {
     base: "SauceLabs",

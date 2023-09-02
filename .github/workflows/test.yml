@@ -26,8 +26,8 @@ jobs:
             name: OSX Safari Stable
             targetBrowser: Safari_Stable
           - os: macos-latest
-            name: iOS Simulator Safari 16.0
-            targetBrowser: Safari_IOS_16_0
+            name: iOS Simulator Safari 16.2
+            targetBrowser: Safari_IOS_16_2
           - os: ubuntu-latest
             name: Android Simulator Nexus_5_API_23_x86
             targetBrowser: Pixel_7_API_33_x86_64
