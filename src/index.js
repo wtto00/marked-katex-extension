@@ -1,70 +1,53 @@
 import katex from 'katex';
 
-const inlineStartRule = /(\s|^)\${1,2}(?!\$)/;
-const inlineRule = /^(\${1,2})(?!\$)((?:\\.|[^\\\n])*?(?:\\.|[^\\\n\$]))\1(?=[\s?!\.,:]|$)/;
-const blockRule = /^(\${1,2})\n((?:\\[^]|[^\\])+?)\n\1(?:\n|$)/;
-
 export default function(options = {}) {
   return {
-    extensions: [
-      inlineKatex(options, createRenderer(options, false)),
-      blockKatex(options, createRenderer(options, true))
-    ]
+    extensions: [inlineKatex(options), blockKatex(options)]
   };
 }
 
-function createRenderer(options, newlineAfter) {
-  return (token) => katex.renderToString(token.text, { ...options, displayMode: token.displayMode }) + (newlineAfter ? '\n' : '');
-}
-
-function inlineKatex(options, renderer) {
+function inlineKatex(options) {
   return {
     name: 'inlineKatex',
     level: 'inline',
     start(src) {
-      const match = src.match(inlineStartRule);
-      if (!match) {
-        return;
-      }
-
-      const index = match.index + match[1].length;
-      const possibleKatex = src.substring(index);
-
-      if (possibleKatex.match(inlineRule)) {
-        return index;
-      }
+      return src.indexOf('$');
     },
     tokenizer(src, tokens) {
-      const match = src.match(inlineRule);
+      const match = src.match(/^\$+([^$\n]+?)\$+/);
       if (match) {
         return {
           type: 'inlineKatex',
           raw: match[0],
-          text: match[2].trim(),
-          displayMode: match[1].length === 2
+          text: match[1].trim()
         };
       }
     },
-    renderer
+    renderer(token) {
+      return katex.renderToString(token.text, options);
+    }
   };
 }
 
-function blockKatex(options, renderer) {
+function blockKatex(options) {
   return {
     name: 'blockKatex',
     level: 'block',
-    start(src) { return src.indexOf('\n$'); },
+    start(src) {
+      return src.indexOf('\n$$');
+    },
     tokenizer(src, tokens) {
-      const match = src.match(blockRule);
+      const match = src.match(/^\$\$+\n([^$]+?)\n\$\$+\n/);
       if (match) {
         return {
           type: 'blockKatex',
           raw: match[0],
-          text: match[2].trim(),
-          displayMode: match[1].length === 2
+          text: match[1].trim()
         };
       }
     },
-    renderer
+    renderer(token) {
+      return `<p>${katex.renderToString(token.text, options)}</p>`;
+    }
   };
 }
