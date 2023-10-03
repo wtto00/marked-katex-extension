@@ -56,7 +56,7 @@ const launchers = {
   },
   Safari_IOS_17: {
     base: 'MobileSafari',
-    name: 'iPhone 15',
+    name: 'iPhone 15 Pro',
     platform: 'iOS',
     sdk: '17.0'
   },
