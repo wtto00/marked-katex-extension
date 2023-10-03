@@ -203,7 +203,7 @@ module.exports = function(config) {
       'karma-*',
       require('@chiragrupani/karma-chromium-edge-launcher'),
       require('./server.cjs'),
-      './ios-simulator.cjs',
+      require('./ios-simulator.cjs'),
       '@wtto00/karma-android-launcher'
     ]
   });
