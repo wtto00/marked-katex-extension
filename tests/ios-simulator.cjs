@@ -26,7 +26,7 @@ const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
       if (device.state === 'Shutdown') {
         log.debug(`start to boot device: ${device.udid}`);
         await simctl.bootDevice();
-        await simctl.startBootMonitor();
+        await simctl.startBootMonitor({ timeout: 600000 });
         log.debug(`device: ${device.udid} has been booted`);
       }
       log.debug(`open url: ${url}`);
