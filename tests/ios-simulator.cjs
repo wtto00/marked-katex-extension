@@ -52,7 +52,7 @@ const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
 };
 
 iOSSimulatorSafari.prototype = {
-  name: 'MobileSafari',
+  name: 'iOSSimulatorSafari',
   DEFAULT_CMD: {
     darwin: '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
   },

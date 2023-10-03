@@ -2,55 +2,55 @@
 // Generated on Sun Aug 27 2023 21:47:29 GMT+0800 (中国标准时间)
 const launchers = {
   Safari_IOS_9: {
-    base: 'MobileSafari',
+    base: 'iOSSimulatorSafari',
     name: 'iPhone 5s',
     platform: 'iOS',
     sdk: '9.0'
   },
   Safari_IOS_10: {
-    base: 'MobileSafari',
+    base: 'iOSSimulatorSafari',
     name: 'iPhone 5s',
     platform: 'iOS',
     sdk: '10.0'
   },
   Safari_IOS_12: {
-    base: 'MobileSafari',
+    base: 'iOSSimulatorSafari',
     name: 'iPhone 5s',
     platform: 'iOS',
     sdk: '12.4'
   },
   Safari_IOS_13: {
-    base: 'MobileSafari',
+    base: 'iOSSimulatorSafari',
     name: 'iPhone 8',
     platform: 'iOS',
     sdk: '13.7'
   },
   Safari_IOS_14: {
-    base: 'MobileSafari',
+    base: 'iOSSimulatorSafari',
     name: 'iPhone 8',
     platform: 'iOS',
     sdk: '14.4'
   },
   Safari_IOS_15_0: {
-    base: 'MobileSafari',
+    base: 'iOSSimulatorSafari',
     name: 'iPhone 13',
     platform: 'iOS',
     sdk: '15.0'
   },
   Safari_IOS_15: {
-    base: 'MobileSafari',
+    base: 'iOSSimulatorSafari',
     name: 'iPhone 13',
     platform: 'iOS',
     sdk: '15.2'
   },
   Safari_IOS_16_2: {
-    base: 'MobileSafari',
+    base: 'iOSSimulatorSafari',
     name: 'iPhone 14',
     platform: 'iOS',
     sdk: '16.2'
   },
   Safari_IOS_17: {
-    base: 'MobileSafari',
+    base: 'iOSSimulatorSafari',
     name: 'iPhone 15 Pro',
     platform: 'iOS',
     sdk: '17.0'
@@ -88,7 +88,7 @@ const customLaunchers = ciLauncher
     //   base: 'Edge'
     // }
     // local_ios_safari: {
-    //   base: "MobileSafari",
+    //   base: "iOSSimulatorSafari",
     //   name: "iPhone 14",
     //   platform: "iOS",
     //   sdk: "16.0",
