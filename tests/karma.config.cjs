@@ -54,7 +54,7 @@ const launchers = {
     platform: 'iOS',
     sdk: '16.2'
   },
-  Safari_IOS_beta: {
+  Safari_IOS_17: {
     base: 'MobileSafari',
     name: 'iPhone 15',
     platform: 'iOS',
