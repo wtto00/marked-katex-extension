@@ -124,38 +124,41 @@ const MobileSafari = function(baseBrowserDecorator, args) {
     this._process.kill();
     return;
   }
-  simctl.getDevices().then((res) => {
-    console.log(res);
-  });
   baseBrowserDecorator(this);
   this.on('start', (url) => {
     simctl
       .getDevices(args.sdk, args.platform)
       .then((devices) => {
+        log.info('Available devices:', devices);
         const d = devices.find((d) => {
           return d.name === args.name;
         });
 
         if (!d) {
           log.error(`No device found for sdk ${args.sdk} with name ${args.name}`);
-          log.info('Available devices:', devices);
           this._process.kill();
           return;
+        } else {
+          log.info(`device: ${d.name} has been found`);
         }
 
         return iosSimulator
           .getSimulator(d.udid)
           .then((device) => {
+            log.info(`get simulator: ${d.uuid}`);
             return simctl.bootDevice(d.udid).then(() => device);
           })
           .then((device) => {
+            log.info(`simulator: ${d.uuid} start to boot`);
             return device.waitForBoot(60 * 5 * 1000).then(() => {
+              log.info(`simulator: ${d.uuid} has been booted`);
               return device.openUrl(url);
             });
           });
       })
       .catch((e) => {
         console.log('err,', e);
+        this._process.kill();
       });
   });
 };
@@ -169,7 +172,7 @@ MobileSafari.prototype = {
 };
 
 MobileSafari.$inject = ['baseBrowserDecorator', 'args'];
-const ip = require('ip');
+// const ip = require('ip');
 
 const myip = 'localhost';//'192.168.1.105'; // ip.address();
 
