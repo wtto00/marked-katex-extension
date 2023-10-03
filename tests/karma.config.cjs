@@ -58,7 +58,7 @@ const launchers = {
     base: 'MobileSafari',
     name: 'iPhone 15',
     platform: 'iOS',
-    sdk: '17'
+    sdk: '17.0'
   },
   Pixel_7_API_33_x86_64: {
     base: 'AndroidEmulator',
