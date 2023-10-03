@@ -28,10 +28,14 @@ jobs:
           - os: macos-latest
             name: iOS Simulator Safari 16.2
             targetBrowser: Safari_IOS_16_2
+            simulator: "iPhone 14"
+            os_version: "16.2"
           - os: macos-13
             name: iOS Simulator Safari 17
             targetBrowser: Safari_IOS_17
             xcode: /Applications/Xcode_15.0.app
+            simulator: "iPhone 15 Pro"
+            os_version: "17.0"
           # - os: macos-latest
           #   name: iOS Simulator Safari 15.0
           #   targetBrowser: Safari_IOS_15_0
@@ -41,7 +45,7 @@ jobs:
           # - os: macos-latest
           #   name: iOS Simulator Safari 14
           #   targetBrowser: Safari_IOS_14
-            # https://stackoverflow.com/questions/51568821/works-in-chrome-but-breaks-in-safari-invalid-regular-expression-invalid-group
+          # https://stackoverflow.com/questions/51568821/works-in-chrome-but-breaks-in-safari-invalid-regular-expression-invalid-group
           # - os: ubuntu-latest
           #   name: Android Simulator Nexus_5_API_23_x86
           #   targetBrowser: Pixel_7_API_33_x86_64
@@ -68,10 +72,14 @@ jobs:
 
       - name: xcode selection
         if: ${{ matrix.config.xcode != '' }}
-        # uses: maxim-lobanov/setup-xcode@v1
-        # with:
-        #   xcode-version: "${{ matrix.config.xcode }}"
         run: sudo xcode-select -s "${{ matrix.config.xcode }}"
+      - name: start simulator
+        if: ${{ matrix.config.simulator != '' }}
+        uses: futureware-tech/simulator-action@v2
+        with:
+          model: "${{matrix.config.simulator}}"
+          os_version: "${{matrix.config.os_version}}"
+          os: 'iOS'
 
       - name: Start Xvfb
         if: ${{ matrix.config.xvfb == true }}
