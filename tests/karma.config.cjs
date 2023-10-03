@@ -139,17 +139,17 @@ const MobileSafari = function(baseBrowserDecorator, args) {
           this._process.kill();
           return;
         } else {
-          log.info(`device: ${d.name} has been found`);
+          log.info(`device: ${d.name} has been found`, d);
         }
 
         return iosSimulator
           .getSimulator(d.udid)
           .then((device) => {
-            log.info(`get simulator: ${d.uuid}`);
+            log.info(`get simulator: ${d.uuid}`, device);
             return simctl.bootDevice(d.udid).then(() => device);
           })
           .then((device) => {
-            log.info(`simulator: ${d.uuid} start to boot`);
+            log.info(`simulator: ${d.uuid} start to boot`, device);
             return device.waitForBoot(60 * 5 * 1000).then(() => {
               log.info(`simulator: ${d.uuid} has been booted`);
               return device.openUrl(url);
@@ -174,7 +174,7 @@ MobileSafari.prototype = {
 MobileSafari.$inject = ['baseBrowserDecorator', 'args'];
 // const ip = require('ip');
 
-const myip = 'localhost';//'192.168.1.105'; // ip.address();
+const myip = 'localhost';// '192.168.1.105'; // ip.address();
 
 // console.log(myip, ip.fromPrefixLen(192, 'ipv4'));
 

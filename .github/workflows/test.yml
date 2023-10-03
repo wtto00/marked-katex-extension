@@ -25,9 +25,9 @@ jobs:
           # - os: macos-latest
           #   name: OSX Safari Stable
           #   targetBrowser: Safari_Stable
-          - os: macos-latest
-            name: iOS Simulator Safari 16.2
-            targetBrowser: Safari_IOS_16_2
+          # - os: macos-latest
+          #   name: iOS Simulator Safari 16.2
+          #   targetBrowser: Safari_IOS_16_2
           - os: macos-13
             name: iOS Simulator Safari 17
             targetBrowser: Safari_IOS_17
