@@ -74,7 +74,7 @@ const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
         log.debug(`device: ${device.udid} has been booted`);
       }
       log.debug(`open url: ${url}`);
-      return spawnExec(`xcrun simctl openurl booted "${url}"`);
+      return spawnExec(`xcrun simctl openurl ${device.udid} "${url}"`);
       // return simctl.openUrl(url);
     } catch (error) {
       log.error('err,', error);
@@ -93,6 +93,7 @@ const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
     if (this.error) {
       this._process.exitCode = -1;
     }
+    process.exit();
   });
 };
 
