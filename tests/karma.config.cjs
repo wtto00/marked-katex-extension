@@ -92,10 +92,23 @@ const customLaunchers = ciLauncher
     //   platform: "iOS",
     //   sdk: "16.0",
     // },
+    // local_android_browser: {
+    //   base: 'AndroidDevice',
+    //   // emulatorOptions: {},
+    //   deviceId: '32d0786e',
+    //   apiLevel: 32,
+    //   target: 'google_apis'
+    // },
     local_android_browser: {
       base: 'AndroidEmulator',
-      avdName: 'Pixel_7_API_33_x86_64',
-      imageName: ''
+      emulatorOptions: {
+        noSnapshot: true,
+        noBootAnim: true
+      }
+      // emulatorOptions: {},
+      // deviceId: '32d0786e',
+      // apiLevel: 32,
+      // target: 'google_apis'
     }
   };
 
@@ -118,9 +131,7 @@ const MobileSafari = function(baseBrowserDecorator, args) {
         });
 
         if (!d) {
-          log.error(
-            `No device found for sdk ${args.sdk} with name ${args.name}`
-          );
+          log.error(`No device found for sdk ${args.sdk} with name ${args.name}`);
           log.info('Available devices:', devices);
           this._process.kill();
           return;
@@ -146,8 +157,7 @@ const MobileSafari = function(baseBrowserDecorator, args) {
 MobileSafari.prototype = {
   name: 'MobileSafari',
   DEFAULT_CMD: {
-    darwin:
-      '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
+    darwin: '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
   },
   ENV_CMD: null
 };
@@ -155,7 +165,9 @@ MobileSafari.prototype = {
 MobileSafari.$inject = ['baseBrowserDecorator', 'args'];
 const ip = require('ip');
 
-const myip = ip.address();
+const myip = 'localhost';//'192.168.1.105'; // ip.address();
+
+// console.log(myip, ip.fromPrefixLen(192, 'ipv4'));
 
 module.exports = function(config) {
   config.set({
@@ -215,7 +227,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_WARN,
+    logLevel: config.LOG_DEBUG,
 
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
@@ -244,7 +256,7 @@ module.exports = function(config) {
       {
         'launcher:MobileSafari': ['type', MobileSafari]
       },
-      require('@wtto00/karma-android-emulator-launcher')
+      '@wtto00/karma-android-launcher'
     ]
   });
 };

@@ -57,7 +57,7 @@
     "@semantic-release/github": "^9.0.4",
     "@semantic-release/npm": "^10.0.5",
     "@semantic-release/release-notes-generator": "^11.0.4",
-    "@wtto00/karma-android-emulator-launcher": "github:wtto00/karma-android-emulator-launcher",
+    "@wtto00/karma-android-launcher": "^1.0.0",
     "appium-ios-simulator": "^5.2.1",
     "babel-jest": "^29.6.3",
     "chai-karma-snapshot": "^0.8.0",

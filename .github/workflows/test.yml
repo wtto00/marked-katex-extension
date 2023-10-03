@@ -11,27 +11,36 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - os: ubuntu-latest
-            name: Linux Firefox Stable
-            targetBrowser: Firefox_Stable
-            xvfb: true
-          - os: ubuntu-latest
-            name: Linux Chrome Stable
-            targetBrowser: Chrome_Stable
-            xvfb: true
-          - os: windows-latest
-            name: Windows Edge Stable
-            targetBrowser: Edge_Stable
-          - os: macos-latest
-            name: OSX Safari Stable
-            targetBrowser: Safari_Stable
+          # - os: ubuntu-latest
+          #   name: Linux Firefox Stable
+          #   targetBrowser: Firefox_Stable
+          #   xvfb: true
+          # - os: ubuntu-latest
+          #   name: Linux Chrome Stable
+          #   targetBrowser: Chrome_Stable
+          #   xvfb: true
+          # - os: windows-latest
+          #   name: Windows Edge Stable
+          #   targetBrowser: Edge_Stable
+          # - os: macos-latest
+          #   name: OSX Safari Stable
+          #   targetBrowser: Safari_Stable
           - os: macos-latest
             name: iOS Simulator Safari 16.2
             targetBrowser: Safari_IOS_16_2
-          - os: ubuntu-latest
-            name: Android Simulator Nexus_5_API_23_x86
-            targetBrowser: Pixel_7_API_33_x86_64
-            setupAndroid: true
+          - os: macos-latest
+            name: iOS Simulator Safari 15.0
+            targetBrowser: Safari_IOS_15_0
+          - os: macos-latest
+            name: iOS Simulator Safari 13
+            targetBrowser: Safari_IOS_13
+          - os: macos-latest
+            name: iOS Simulator Safari 14
+            targetBrowser: Safari_IOS_14
+          # - os: ubuntu-latest
+          #   name: Android Simulator Nexus_5_API_23_x86
+          #   targetBrowser: Pixel_7_API_33_x86_64
+          #   setupAndroid: true
           # - os: macos-11
           #   name: iOS Simulator Safari 15.0
           #   targetBrowser: Safari_IOS_15_0
