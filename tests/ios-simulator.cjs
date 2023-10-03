@@ -70,19 +70,19 @@ const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
       if (device.state === 'Shutdown') {
         log.debug(`start to boot device: ${device.udid}`);
         await simctl.bootDevice();
-        return simctl.startBootMonitor({
+        await simctl.startBootMonitor({
           timeout: 1200000,
-          onFinished: () => {
+          onFinished: async() => {
             log.debug(`device: ${device.udid} has been booted`);
             log.debug(`open url: ${url}`);
             // return spawnExec(`xcrun simctl openurl ${device.udid} "${url}"`);
-            simctl.openUrl(url);
+            await simctl.openUrl(url);
           }
         });
       } else {
         log.debug(`open url: ${url}`);
         // return spawnExec(`xcrun simctl openurl ${device.udid} "${url}"`);
-        return simctl.openUrl(url);
+        await simctl.openUrl(url);
       }
     } catch (error) {
       log.error('err,', error);
@@ -101,6 +101,7 @@ const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
     if (this.error) {
       this._process.exitCode = -1;
     }
+    log.debug('killed-------');
     process.exit();
   });
 };

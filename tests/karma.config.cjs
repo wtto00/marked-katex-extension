@@ -113,9 +113,9 @@ const customLaunchers = ciLauncher
     }
   };
 
-// const ip = require('ip');
+const ip = require('ip');
 
-const myip = 'localhost';// '192.168.1.105'; // ip.address();
+const myip = ip.address();// 'localhost';// '192.168.1.105';
 
 // console.log(myip, ip.fromPrefixLen(192, 'ipv4'));
 
@@ -198,7 +198,7 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser instances should be started simultaneously
-    concurrency: 5,
+    concurrency: 1,
     plugins: [
       'karma-*',
       require('@chiragrupani/karma-chromium-edge-launcher'),
