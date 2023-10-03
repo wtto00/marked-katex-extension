@@ -28,10 +28,10 @@ jobs:
           # - os: macos-latest
           #   name: iOS Simulator Safari 16.2
           #   targetBrowser: Safari_IOS_16_2
-          - os: macos-latest
+          - os: macos-13
             name: iOS Simulator Safari beta
             targetBrowser: Safari_IOS_beta
-            xcode: 15.0-beta
+            xcode: '15.0'
           # - os: macos-latest
           #   name: iOS Simulator Safari 15.0
           #   targetBrowser: Safari_IOS_15_0
