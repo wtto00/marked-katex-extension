@@ -31,7 +31,7 @@ jobs:
           - os: macos-latest
             name: iOS Simulator Safari beta
             targetBrowser: Safari_IOS_beta
-            xcode: /Applications/Xcode-beta.app 
+            xcode: /Applications/Xcode-beta.app/Contents/Developer
           # - os: macos-latest
           #   name: iOS Simulator Safari 15.0
           #   targetBrowser: Safari_IOS_15_0
