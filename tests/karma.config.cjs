@@ -145,13 +145,13 @@ const MobileSafari = function(baseBrowserDecorator, args) {
         return iosSimulator
           .getSimulator(d.udid)
           .then((device) => {
-            log.info(`get simulator: ${d.uuid}`, device);
+            log.info(`get simulator: ${d.udid}`, device);
             return simctl.bootDevice(d.udid).then(() => device);
           })
           .then((device) => {
-            log.info(`simulator: ${d.uuid} start to boot`, device);
+            log.info(`simulator: ${d.udid} start to boot`, device);
             return device.waitForBoot(60 * 5 * 1000).then(() => {
-              log.info(`simulator: ${d.uuid} has been booted`);
+              log.info(`simulator: ${d.udid} has been booted`);
               return device.openUrl(url);
             });
           });
