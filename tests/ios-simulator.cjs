@@ -1,4 +1,48 @@
 const { default: Simctl } = require('node-simctl');
+const { spawn } = require('node:child_process');
+
+/**
+ * @param {string} command
+ */
+function transformCommand(command) {
+  const [cmd, ...args] = command.split(' ');
+  return { cmd, args: args.filter((arg) => arg) };
+}
+/**
+ * @param {string} command
+ * @param {number} [timeout=300000]
+ * @returns {Promise<ChildProcessWithoutNullStreams & { output: string }>}
+ */
+function spawnExec(command, timeout = 300000) {
+  return new Promise((resolve, reject) => {
+    const { cmd, args } = transformCommand(command);
+    const proc = spawn(cmd, args);
+    const clock = setTimeout(() => {
+      console.log('timeout', timeout, command);
+      proc.kill();
+      reject(Error('Execution timeout'));
+    }, timeout);
+    let output = '';
+    proc.stdout.setEncoding('utf8');
+    proc.stdout.on('data', (data) => {
+      output += data;
+    });
+    let error = '';
+    proc.stderr.setEncoding('utf8');
+    proc.stderr.on('data', (err) => {
+      error += err;
+    });
+    proc.on('close', (code) => {
+      clearTimeout(clock);
+      if (code) {
+        reject(Error(error));
+      } else {
+        proc.output = output;
+        resolve(proc);
+      }
+    });
+  });
+}
 
 const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
   const log = logger.create('launcher:iOSSimulatorSafari');
@@ -30,7 +74,8 @@ const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
         log.debug(`device: ${device.udid} has been booted`);
       }
       log.debug(`open url: ${url}`);
-      return simctl.openUrl(url);
+      return spawnExec(`xcrun simctl openurl booted "${url}"`);
+      // return simctl.openUrl(url);
     } catch (error) {
       log.error('err,', error);
       this._process.exitCode = -1;
