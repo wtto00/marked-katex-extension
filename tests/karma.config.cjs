@@ -186,9 +186,9 @@ module.exports = function(config) {
     // available browser launchers: https://www.npmjs.com/search?q=keywords:karma-launcher
     browsers: Object.keys(customLaunchers),
     customLaunchers,
-    captureTimeout: 300000, // 5 minutes
+    captureTimeout: 1200000, // 20 minutes
     browserDisconnectTimeout: 60000, // 1 minute
-    browserNoActivityTimeout: 1200000, // 20 minutes
+    browserNoActivityTimeout: 300000, // 5 minutes
     browserDisconnectTolerance: 3,
     // browsers: ['Chrome', 'Firefox', 'ChromeCanary', 'ChromeHeadless', 'Safari', 'PhantomJS', 'Opera', 'IE'],
 
