@@ -51,7 +51,7 @@ const launchers = {
   },
   Safari_IOS_17: {
     base: 'iOSSimulatorSafari',
-    name: 'iPhone 15 Pro',
+    name: 'iPhone 15',
     platform: 'iOS',
     sdk: '17.0'
   },

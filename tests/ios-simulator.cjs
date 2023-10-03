@@ -59,9 +59,9 @@ const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
   this.on('start', async(url) => {
     try {
       const devices = await simctl.getDevices(args.sdk, args.platform);
-      log.info('all devices: ', devices);
       const device = devices.find(d => d.name === args.name);
       if (!device) {
+        log.info('devices not found, all device: ', devices);
         throw Error(`No device found for sdk ${args.sdk} with name ${args.name}`);
       }
       log.debug(`device: ${device.name} has been found`);
@@ -101,7 +101,7 @@ const iOSSimulatorSafari = function(args, logger, baseLauncherDecorator) {
     if (this.error) {
       this._process.exitCode = -1;
     }
-    log.debug('killed-------');
+    log.debug('killed-------', this._process, this);
     process.exit();
   });
 };

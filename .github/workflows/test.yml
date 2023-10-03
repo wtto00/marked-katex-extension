@@ -34,7 +34,7 @@ jobs:
             name: iOS Simulator Safari 17
             targetBrowser: Safari_IOS_17
             xcode: /Applications/Xcode_15.0.app
-            simulator: "iPhone 15 Pro"
+            simulator: "iPhone 15"
             os_version: "17.0"
           # - os: macos-latest
           #   name: iOS Simulator Safari 15.0
