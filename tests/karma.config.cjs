@@ -1,10 +1,5 @@
 // Karma configuration
 // Generated on Sun Aug 27 2023 21:47:29 GMT+0800 (中国标准时间)
-const simctl = require('node-simctl');
-const iosSimulator = require('appium-ios-simulator');
-
-const log = require('karma/lib/logger').create('launcher:MobileSafari');
-
 const launchers = {
   Safari_IOS_9: {
     base: 'MobileSafari',
@@ -118,60 +113,6 @@ const customLaunchers = ciLauncher
     }
   };
 
-const MobileSafari = function(baseBrowserDecorator, args) {
-  if (process.platform !== 'darwin') {
-    log.error('This launcher only works in MacOS.');
-    this._process.kill();
-    return;
-  }
-  baseBrowserDecorator(this);
-  this.on('start', (url) => {
-    simctl
-      .getDevices(args.sdk, args.platform)
-      .then((devices) => {
-        log.info('Available devices:', devices);
-        const d = devices.find((d) => {
-          return d.name === args.name;
-        });
-
-        if (!d) {
-          log.error(`No device found for sdk ${args.sdk} with name ${args.name}`);
-          this._process.kill();
-          return;
-        } else {
-          log.info(`device: ${d.name} has been found`, d);
-        }
-
-        return iosSimulator
-          .getSimulator(d.udid)
-          .then((device) => {
-            log.info(`get simulator: ${d.udid}`, device);
-            return simctl.bootDevice(d.udid).then(() => device);
-          })
-          .then((device) => {
-            log.info(`simulator: ${d.udid} start to boot`, device);
-            return device.waitForBoot(60 * 5 * 1000).then(() => {
-              log.info(`simulator: ${d.udid} has been booted`);
-              return device.openUrl(url);
-            });
-          });
-      })
-      .catch((e) => {
-        console.log('err,', e);
-        this._process.kill();
-      });
-  });
-};
-
-MobileSafari.prototype = {
-  name: 'MobileSafari',
-  DEFAULT_CMD: {
-    darwin: '/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/Contents/MacOS/Simulator'
-  },
-  ENV_CMD: null
-};
-
-MobileSafari.$inject = ['baseBrowserDecorator', 'args'];
 // const ip = require('ip');
 
 const myip = 'localhost';// '192.168.1.105'; // ip.address();
@@ -262,9 +203,7 @@ module.exports = function(config) {
       'karma-*',
       require('@chiragrupani/karma-chromium-edge-launcher'),
       require('./server.cjs'),
-      {
-        'launcher:MobileSafari': ['type', MobileSafari]
-      },
+      './ios-simulator.cjs',
       '@wtto00/karma-android-launcher'
     ]
   });
